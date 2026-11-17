@@ -1,0 +1,19 @@
+# On a running skill's page the footer shows that skill; elsewhere it shows the last action started.
+goto Woodcutting
+click "Cut" 1
+goto Mining
+click "Start Mining" 1
+wait 1000
+goto Bank
+mt list
+expect reply "MelvorBase:Mining [footer]"
+goto Woodcutting
+wait 500
+mt list
+expect reply "MelvorBase:Woodcutting [footer]"
+# A skill that isn't running doesn't take the footer from the others.
+goto Fishing
+wait 500
+mt list
+expect reply "MelvorBase:Mining [footer]"
+expect log Multitasking no "ERROR"

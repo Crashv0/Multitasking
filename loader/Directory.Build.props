@@ -1,0 +1,11 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <!-- Loader package version: winmm proxy, Loader and host ship together. -->
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+  <!-- This folder's paths start at loader/, wherever it is. -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildThisFileDirectory)=/_/loader/</PathMap>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- The dev Loader's copy has a folder of its own, with no mod in it: no mod's removal takes it along. -->
+    <DeployDir Condition="'$(IsTestProject)' != 'true'">$(MelvorModsDir)/_loader/loader</DeployDir>
+  </PropertyGroup>
+  <Import Project="$(MelvorBuildDir)Deploy.targets" />
+</Project>

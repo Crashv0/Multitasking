@@ -1,0 +1,39 @@
+# Messages of Multitasking, extracted from its sources by ./mm strings Multitasking. Don't edit: regenerate it.
+msgid ""
+msgstr ""
+"Project-Id-Version: Multitasking\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/FooterChip.cs:106
+#: src/FooterChip.cs:133
+msgid "Show running actions"
+msgstr ""
+
+#: src/RunningList.cs:200
+msgid "Running"
+msgstr ""
+
+#: src/RunningList.cs:201
+#, csharp-format
+msgid "{0} running"
+msgstr ""
+
+#: src/RunningList.cs:202
+msgid "Stop all"
+msgstr ""
+
+#: src/RunningList.cs:254
+msgid "in footer"
+msgstr ""
+
+#: src/RunningList.cs:276
+#, csharp-format
+msgid "Open the {0} page"
+msgstr ""
+
+#: src/RunningList.cs:287
+#, csharp-format
+msgid "Stop {0}"
+msgstr ""

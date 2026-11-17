@@ -1,0 +1,14 @@
+<Project>
+  <!-- Debug builds deploy into the game. Projects set DeployDir and optional DeployDependency items (file names in OutDir). -->
+  <Target Name="DeployToGame" AfterTargets="Build" Condition="'$(Deploy)' != 'false' and '$(Configuration)' == 'Debug' and '$(DeployDir)' != '' and Exists('$(MelvorGame)')">
+    <ItemGroup>
+      <_Deploy Include="$(TargetPath);$(OutDir)$(TargetName).pdb" />
+      <_Deploy Include="@(DeployDependency->'$(OutDir)%(Identity)')" />
+      <_Deploy Include="$(MSBuildProjectDirectory)/manifest.json" Condition="Exists('$(MSBuildProjectDirectory)/manifest.json')" />
+      <_DeployData Include="$(MSBuildProjectDirectory)/data/**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_Deploy)" DestinationFolder="$(DeployDir)" Retries="2" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_DeployData)" DestinationFiles="@(_DeployData->'$(DeployDir)/data/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Deployed $(MSBuildProjectName) to $(DeployDir)" />
+  </Target>
+</Project>

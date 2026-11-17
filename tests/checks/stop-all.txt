@@ -1,0 +1,13 @@
+# Stop all in the Running list stops everything, and the list closes with nothing left.
+goto Woodcutting
+click "Cut" 1
+goto Mining
+click "Start Mining" 1
+wait 1000
+click "+1"
+click "Stop all"
+wait 500
+mt list
+expect reply "0 running"
+expect no see "Stop all"
+expect log Multitasking no "ERROR"

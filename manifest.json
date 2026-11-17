@@ -1,0 +1,9 @@
+{
+  "id": "Multitasking",
+  "name": "Multitasking",
+  "version": "0.1.0",
+  "author": "Crash",
+  "description": "Train combat and multiple skills simultaneously.",
+  "dependencies": [],
+  "gameBuilds": [{ "build": "26724394", "version": "0.11.6-alpha.1" }]
+}

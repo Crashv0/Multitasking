@@ -1,0 +1,10 @@
+<Project>
+  <ItemGroup>
+    <Reference Include="$(MelvorData)/GamesByMalcs.Melvor2.dll" Publicize="true" Private="false" />
+    <Reference Include="$(MelvorData)/GodotSharp.dll" Private="false" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" PrivateAssets="all" />
+  </ItemGroup>
+  <Target Name="CheckMelvorGame" BeforeTargets="ResolveAssemblyReferences" Condition="!Exists('$(MelvorData)')">
+    <Error Text="Melvor Idle 2 not found; set MelvorGame in build.local.props" />
+  </Target>
+</Project>

@@ -1,0 +1,15 @@
+<Project>
+  <!-- This repository's layout, for the build files in build/. The mod is the project in this folder; the Loader's
+       projects under loader/ take only the common part. -->
+  <PropertyGroup>
+    <MelvorCoreDir>$(MSBuildThisFileDirectory)loader/Core/</MelvorCoreDir>
+    <MelvorBuildDir>$(MSBuildThisFileDirectory)build/</MelvorBuildDir>
+    <MelvorProjectDir>$([MSBuild]::EnsureTrailingSlash('$(MSBuildProjectDirectory)'))</MelvorProjectDir>
+    <MelvorIsMod Condition="'$(MelvorProjectDir)' == '$(MSBuildThisFileDirectory)'">true</MelvorIsMod>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MelvorIsMod)' == 'true'">
+    <DefaultItemExcludes>$(DefaultItemExcludes);loader/**;build/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <Import Project="build/Common.props" />
+  <Import Project="build/Mod.props" Condition="'$(MelvorIsMod)' == 'true'" />
+</Project>

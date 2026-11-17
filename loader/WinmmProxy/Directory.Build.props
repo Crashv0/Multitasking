@@ -1,0 +1,9 @@
+<Project>
+  <!-- The proxy needs the game's folder only to deploy. Where the msbuild files aren't at their place in this
+       layout, it builds without them and deploys only when told the folder (MelvorGame). -->
+  <PropertyGroup>
+    <MelvorBuildDir Condition="'$(MelvorBuildDir)' == ''">$(MSBuildThisFileDirectory)../../tools/msbuild/</MelvorBuildDir>
+  </PropertyGroup>
+  <Import Project="../../build.local.props" Condition="Exists('../../build.local.props')" />
+  <Import Project="$(MelvorBuildDir)Game.props" Condition="Exists('$(MelvorBuildDir)Game.props')" />
+</Project>

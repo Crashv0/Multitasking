@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup Condition="'$(MelvorIsModTests)' != 'true'">
+    <DeployDir>$(MelvorModsDir)/$(ModId)</DeployDir>
+  </PropertyGroup>
+  <!-- The mod's own copy of the shared code, internal to it. In the targets so a mod's UseCoreMenu counts. -->
+  <ItemGroup Condition="'$(MelvorIsModTests)' != 'true'">
+    <Compile Include="$(MelvorCoreDir)Shared/**/*.cs" Link="Core/Shared/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="$(MelvorCoreDir)Entry/**/*.cs" Link="Core/Entry/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="$(MelvorCoreDir)Menu/**/*.cs" Link="Core/Menu/%(RecursiveDir)%(Filename)%(Extension)" Condition="'$(UseCoreMenu)' == 'true'" />
+    <!-- The game's formatter, for the mod's translated text; the game ships it. -->
+    <Reference Include="$(MelvorData)/SmartFormat.dll" Private="false" />
+  </ItemGroup>
+  <Import Project="$(MelvorBuildDir)Deploy.targets" Condition="'$(MelvorIsModTests)' != 'true'" />
+</Project>

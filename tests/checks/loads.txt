@@ -1,0 +1,5 @@
+# The mod is loaded and answers, with no error in its log.
+mt list
+expect reply "0 running"
+goto Mining
+expect log Multitasking no "ERROR"

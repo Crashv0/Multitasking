@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.ico binary
+*.ttf binary
+*.otf binary
+
+src/WinmmProxy/exports.def linguist-generated
+src/WinmmProxy/exports.inc linguist-generated
+src/WinmmProxy/thunks.asm linguist-generated

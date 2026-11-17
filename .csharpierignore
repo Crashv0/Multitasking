@@ -1,0 +1,9 @@
+# The mod's project is this whole folder, but it formats only its own files and the Loader's, as where they come
+# from. The shared code and the build files are no project's there, and stay as they are here.
+/build/
+/loader/Core/
+/loader/WinmmProxy/
+/loader/Directory.Build.props
+/loader/Directory.Build.targets
+/Directory.Build.props
+/Directory.Build.targets

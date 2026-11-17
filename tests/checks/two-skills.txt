@@ -1,0 +1,16 @@
+# Starting a second skill leaves the first running, and the footer counts the one it doesn't show.
+goto Woodcutting
+click "Cut" 1
+goto Mining
+click "Start Mining" 1
+wait 1500
+mt list
+expect reply "2 running"
+expect reply "MelvorBase:Woodcutting"
+expect reply "MelvorBase:Mining"
+expect see "+1"
+# The chip is a button: pressing it opens the Running list.
+click "+1"
+expect see "2 running"
+expect see "Stop all"
+expect log Multitasking no "ERROR"

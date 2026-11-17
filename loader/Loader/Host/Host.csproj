@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>MelvorMods.Host</AssemblyName>
+    <RootNamespace>MelvorMods.Host</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!-- Generated P/Invoke marshalling for reading the command line, in the shared code. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <Import Project="$(MelvorBuildDir)GameRefs.props" />
+  <ItemGroup>
+    <!-- The shared files the host uses, compiled in as a mod compiles them: its own internal copy. -->
+    <Compile Include="$(MelvorCoreDir)Shared/Commands.cs" Link="Shared/Commands.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/GameBuild.cs" Link="Shared/GameBuild.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/GameTree.cs" Link="Shared/GameTree.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/Log.cs" Link="Shared/Log.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/Manifest.cs" Link="Shared/Manifest.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/ModTable.cs" Link="Shared/ModTable.cs" />
+    <Compile Include="$(MelvorCoreDir)Shared/Standalone.cs" Link="Shared/Standalone.cs" />
+    <!-- Mods find Harmony beside the host, in every build. -->
+    <PackageReference Include="Lib.Harmony" GeneratePathProperty="true" />
+    <DeployDependency Include="0Harmony.dll" />
+    <!-- Harmony's licence asks that its notice goes wherever its DLL goes. -->
+    <None
+      Include="$(PkgLib_Harmony)/LICENSE"
+      Link="0Harmony.LICENSE.txt"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+  </ItemGroup>
+  <!-- Reloading is for development: only Debug builds compile it. -->
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <Compile Remove="ModHost.Dev.cs;ReloadPlan.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Multitasking's Godot-free code, compiled in without the mod (which needs the game). -->
+  <PropertyGroup>
+    <AssemblyName>MelvorMods.Multitasking.Tests</AssemblyName>
+    <RootNamespace>MelvorMods.Multitasking.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <OutputType>Exe</OutputType>
+    <!-- Windows won't create the test exe on the WSL share. -->
+    <OutDir Condition="'$(LOCALAPPDATA)' != ''"
+      >$(LOCALAPPDATA)\MelvorMods\tests\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../src/RunningMath.cs" Link="RunningMath.cs" />
+    <Compile Include="../src/Part.cs" Link="Part.cs" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+</Project>

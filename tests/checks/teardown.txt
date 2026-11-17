@@ -1,0 +1,3 @@
+# And leaves nothing running, whatever it did.
+mt stopall
+expect reply "0 still running"

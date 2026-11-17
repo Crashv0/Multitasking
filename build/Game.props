@@ -1,0 +1,10 @@
+<Project>
+  <!-- Override MelvorGame in build.local.props when the game is outside the main Steam library. -->
+  <PropertyGroup>
+    <SteamPath Condition="'$(SteamPath)' == ''">$([MSBuild]::GetRegistryValue('HKEY_CURRENT_USER\Software\Valve\Steam', 'SteamPath'))</SteamPath>
+    <MelvorGame Condition="'$(MelvorGame)' == '' and Exists('$(SteamPath)/steamapps/common/Melvor Idle 2')">$(SteamPath)/steamapps/common/Melvor Idle 2</MelvorGame>
+    <MelvorData>$(MelvorGame)/data_GamesByMalcs.Melvor2_windows_x86_64</MelvorData>
+    <!-- An installed mod is one folder here, with its own copy of the Loader in it. -->
+    <MelvorModsDir>$(MelvorGame)/mods</MelvorModsDir>
+  </PropertyGroup>
+</Project>

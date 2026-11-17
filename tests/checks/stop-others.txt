@@ -1,0 +1,14 @@
+# Only starting an action keeps the others running: the game's own stop-all, asked for by anyone else (another mod),
+# still stops everything.
+goto Woodcutting
+click "Cut" 1
+goto Mining
+click "Start Mining" 1
+wait 1000
+mt list
+expect reply "2 running"
+mt stopgame
+expect reply "0 still running"
+mt list
+expect reply "0 running"
+expect log Multitasking no "ERROR"

@@ -1,0 +1,27 @@
+<Project>
+  <!-- Whoever has set the layout has imported the root file already. -->
+  <Import Project="../Directory.Build.props" Condition="'$(MelvorBuildDir)' == ''" />
+  <!-- A mod's tests sit in its folder but are no mod: they take the common part only. -->
+  <PropertyGroup>
+    <MelvorIsModTests Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</MelvorIsModTests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MelvorIsModTests)' != 'true'">
+    <ModId>$(MSBuildProjectName)</ModId>
+    <AssemblyName>$(ModId)</AssemblyName>
+    <RootNamespace>MelvorMods.$(ModId)</RootNamespace>
+    <ModManifest>$(MSBuildProjectDirectory)/manifest.json</ModManifest>
+    <Version Condition="Exists('$(ModManifest)')">$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(ModManifest)')), '(?m)(?&lt;=^\s*"version"\s*:\s*")[^"]+').Value)</Version>
+    <!-- Generated P/Invoke marshalling for reading the command line, in the shared code. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- The mod never compiles or ships its tests. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);tests/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <!-- The mod's folder is the root of its paths and the shared code sits under loader/, wherever either is. -->
+  <PropertyGroup Condition="'$(MelvorIsModTests)' != 'true' and '$(Configuration)' == 'Release'">
+    <PathMap>$([MSBuild]::EnsureTrailingSlash('$(MSBuildProjectDirectory)'))=/_/,$([System.IO.Path]::GetFullPath('$(MelvorCoreDir)'))=/_/loader/Core/</PathMap>
+  </PropertyGroup>
+  <Import Project="$(MelvorBuildDir)GameRefs.props" Condition="'$(MelvorIsModTests)' != 'true'" />
+  <ItemGroup Condition="'$(MelvorIsModTests)' != 'true'">
+    <PackageReference Include="Lib.Harmony" ExcludeAssets="runtime" />
+  </ItemGroup>
+</Project>

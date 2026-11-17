@@ -1,0 +1,41 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>portable</DebugType>
+    <MelvorModsRoot>$(MSBuildThisFileDirectory)</MelvorModsRoot>
+    <!-- Where the shared code and the msbuild files are. A tree laid out differently sets both before this file. -->
+    <MelvorCoreDir Condition="'$(MelvorCoreDir)' == ''">$(MelvorModsRoot)src/Core/</MelvorCoreDir>
+    <MelvorBuildDir Condition="'$(MelvorBuildDir)' == ''">$(MelvorModsRoot)tools/msbuild/</MelvorBuildDir>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageVersionsFileImported>true</CentralPackageVersionsFileImported>
+  </PropertyGroup>
+  <!-- A shipped binary names no folder of the machine that built it and no commit, so it is the same wherever the
+       tree is. Each kind of project maps its own source folders (PathMap). -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <EnableSourceLink>false</EnableSourceLink>
+    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Lib.Harmony" Version="2.4.3" />
+    <PackageVersion Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" />
+    <PackageVersion Include="CSharpier.MSBuild" Version="1.3.0" />
+    <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="10.0.14" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
+    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CSharpier.MSBuild" PrivateAssets="all" />
+  </ItemGroup>
+  <Import Project="build.local.props" Condition="Exists('build.local.props')" />
+  <Import Project="$(MelvorBuildDir)Game.props" />
+</Project>

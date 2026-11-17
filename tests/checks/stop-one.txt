@@ -1,0 +1,12 @@
+# Stopping a skill from its own page stops only that skill.
+goto Woodcutting
+click "Cut" 1
+goto Mining
+click "Start Mining" 1
+wait 1000
+click "Stop"
+wait 500
+mt list
+expect reply "1 running"
+expect reply "MelvorBase:Woodcutting"
+expect log Multitasking no "ERROR"

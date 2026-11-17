@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>MelvorMods.Loader</AssemblyName>
+    <RootNamespace>MelvorMods.Loader</RootNamespace>
+    <!-- Generated P/Invoke marshalling for reading the command line. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- The host is its own assembly: it loads into the game's context, after the game's assembly. -->
+    <Compile Remove="Host/**" />
+  </ItemGroup>
+</Project>
